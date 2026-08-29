@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Virtual Theater</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-box">
+
+            <div class="auth-logo">
+                <div class="auth-icon">▶</div>
+                <h1>VIRTUAL THEATER</h1>
+            </div>
+
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue to Virtual Theater</p>
+
+            <form id="loginForm">
+
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit" class="auth-button">
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+
+            <button class="google-button" type="button">
+                Continue with Google
+            </button>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a href="#" id="createAccount">
+                    Create Account
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

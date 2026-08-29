@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Virtual Theater</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">▶</div>
+
+            <span>VIRTUAL THEATER</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html" class="active-nav">Home</a>
+
+            <a href="#movies">Movies</a>
+
+            <a href="#movies">🔥 Trending</a>
+
+        </nav>
+
+
+        <div class="navbar-right">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="🔍 Search movies..."
+            >
+
+            <button id="signInBtn" class="sign-in-btn">
+                Sign In
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <!-- LEFT SIDE -->
+
+        <div class="hero-content">
+
+            <div class="hero-tag">
+                WELCOME TO THE FUTURE OF ENTERTAINMENT
+            </div>
+
+
+            <h1>
+                VIRTUAL
+                <br>
+                THEATER
+            </h1>
+
+
+            <p>
+                Discover movies, explore detailed information,
+                and watch content you have permission to stream.
+            </p>
+
+
+            <div class="hero-features">
+
+                <span>🔥 Trending Now</span>
+
+                <span>🎬 Latest Movies</span>
+
+                <span>🌐 Multiple Languages</span>
+
+            </div>
+
+
+            <a href="#movies" class="browse-btn">
+                Browse Movies
+            </a>
+
+        </div>
+
+
+        <!-- RIGHT SIDE POSTER SLIDER -->
+
+        <div class="hero-poster-slider">
+
+            <div class="poster-track">
+
+
+                <div class="slide active">
+
+                    <img
+                        src="assets/posters/spiderman.jpg"
+                        alt="Spider-Man: Brand New Day"
+                    >
+
+                    <div class="slide-title">
+                        Spider-Man: Brand New Day
+                    </div>
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img
+                        src="assets/posters/dhurandhar.jpg"
+                        alt="Dhurandhar"
+                    >
+
+                    <div class="slide-title">
+                        Dhurandhar
+                    </div>
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img
+                        src="assets/posters/dhoomdhaam.jpg"
+                        alt="Dhoom Dhaam"
+                    >
+
+                    <div class="slide-title">
+                        Dhoom Dhaam
+                    </div>
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img
+                        src="assets/posters/odyssey.jpg"
+                        alt="The Odyssey"
+                    >
+
+                    <div class="slide-title">
+                        The Odyssey
+                    </div>
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img
+                        src="assets/posters/toystory5.jpg"
+                        alt="Toy Story 5"
+                    >
+
+                    <div class="slide-title">
+                        Toy Story 5
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- SLIDER BUTTONS -->
+
+            <button class="slider-btn prev-btn">
+                ❮
+            </button>
+
+            <button class="slider-btn next-btn">
+                ❯
+            </button>
+
+
+            <!-- DOTS -->
+
+            <div class="slider-dots"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MOVIES SECTION -->
+
+    <section id="movies" class="movies-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="small-title">
+                    EXPLORE
+                </p>
+
+                <h2>
+                    Latest Movies
+                </h2>
+
+            </div>
+
+
+            <p class="collection-text">
+                Discover our movie collection
+            </p>
+
+        </div>
+
+
+        <!-- MOVIE GRID -->
+
+        <div id="movieGrid" class="movie-grid">
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+
+            <strong>VIRTUAL THEATER</strong>
+
+            <p>
+                Your personal entertainment library.
+            </p>
+
+        </div>
+
+
+        <p>
+            © 2026 Virtual Theater
+        </p>
+
+    </footer>
+
+
+    <!-- SIGN IN POPUP -->
+
+    <div id="loginModal" class="login-modal">
+
+        <div class="login-box">
+
+            <button id="closeLogin" class="close-login">
+                &times;
+            </button>
+
+
+            <h2>
+                Welcome Back
+            </h2>
+
+
+            <p class="login-subtitle">
+                Sign in to Virtual Theater
+            </p>
+
+
+            <form id="loginForm">
+
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <button type="submit" class="login-submit">
+                    Sign In
+                </button>
+
+
+            </form>
+
+
+            <p id="loginMessage"></p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Details | Virtual Theater</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #090813;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            padding: 0 7%;
+            gap: 55px;
+            border-bottom: 1px solid #29233f;
+            background: #0d0c18;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .logo span {
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #9b6cff, #5937cf);
+            border-radius: 10px;
+            margin-right: 12px;
+        }
+
+        nav a {
+            color: #b9b5c9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #a778ff;
+        }
+
+        /* MOVIE HERO */
+
+        .movie-hero {
+            min-height: 600px;
+            padding: 70px 7%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .movie-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    90deg,
+                    #090813 5%,
+                    rgba(9,8,19,.92) 38%,
+                    rgba(9,8,19,.65) 65%,
+                    #090813 100%
+                );
+            z-index: 1;
+        }
+
+        .movie-background {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .45;
+        }
+
+        .movie-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .poster-container {
+            flex-shrink: 0;
+        }
+
+        .movie-poster {
+            width: 310px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.7);
+            border: 1px solid #393050;
+        }
+
+        .movie-info {
+            max-width: 700px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 9px 16px;
+            border: 1px solid #6d4bc7;
+            border-radius: 25px;
+            color: #c5b2ff;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #bcb7ca;
+            margin-bottom: 25px;
+        }
+
+        .description {
+            color: #c3bfce;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, #a970ff, #6845df);
+            color: white;
+            border: none;
+            padding: 15px 28px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid #51486b;
+            padding: 15px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        /* DETAILS */
+
+        .details-section {
+            padding: 60px 7%;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .detail-card {
+            background: #151321;
+            border: 1px solid #2b2540;
+            padding: 25px;
+            border-radius: 14px;
+        }
+
+        .detail-card h3 {
+            color: #a778ff;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .detail-card p {
+            color: #ddd9e8;
+            font-size: 17px;
+        }
+
+        /* CAST */
+
+        .cast-section {
+            padding: 10px 7% 70px;
+        }
+
+        .cast-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .cast-member {
+            padding: 13px 20px;
+            background: #151321;
+            border: 1px solid #30294a;
+            border-radius: 25px;
+            color: #d5d0df;
+        }
+
+        footer {
+            border-top: 1px solid #28233b;
+            padding: 30px 7%;
+            color: #888293;
+        }
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+                gap: 20px;
+            }
+
+            .movie-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .movie-poster {
+                width: 220px;
+                height: 330px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <div class="logo">
+            <span>▶</span>VIRTUAL THEATER
+        </div>
+
+        <a href="index.html">Home</a>
+        <a href="index.html#movies">Movies</a>
+    </nav>
+
+
+    <!-- MOVIE -->
+
+    <section class="movie-hero">
+
+        <img
+            id="backgroundImage"
+            class="movie-background"
+            src=""
+            alt=""
+        >
+
+        <div class="movie-content">
+
+            <div class="poster-container">
+                <img
+                    id="moviePoster"
+                    class="movie-poster"
+                    src=""
+                    alt="Movie Poster"
+                >
+            </div>
+
+            <div class="movie-info">
+
+                <div class="tag">MOVIE DETAILS</div>
+
+                <h1 id="movieTitle">Loading...</h1>
+
+                <div class="meta">
+                    <span id="movieYear"></span>
+                    <span id="movieGenre"></span>
+                    <span id="movieRating"></span>
+                    <span id="movieDuration"></span>
+                </div>
+
+                <p class="description" id="movieDescription">
+                    Loading movie information...
+                </p>
+
+                <div class="buttons">
+                    <a id="watchButton" class="watch-btn" href="#">
+                        ▶ Watch Now
+                    </a>
+
+                    <a href="index.html" class="back-btn">
+                        ← Back
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MOVIE INFORMATION -->
+
+    <section class="details-section">
+
+        <h2 class="section-title">MOVIE INFORMATION</h2>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <h3>⭐ Rating</h3>
+                <p id="detailRating">N/A</p>
+            </div>
+
+            <div class="detail-card">
+                <h3>🎬 Director</h3>
+                <p id="detailDirector">N/A</p>
+            </div>
+
+            <div class="detail-card">
+                <h3>✍️ Writer</h3>
+                <p id="detailWriter">N/A</p>
+            </div>
+
+            <div class="detail-card">
+                <h3>📅 Release</h3>
+                <p id="detailRelease">N/A</p>
+            </div>
+
+            <div class="detail-card">
+                <h3>⏱ Runtime</h3>
+                <p id="detailRuntime">N/A</p>
+            </div>
+
+            <div class="detail-card">
+                <h3>🌐 Language</h3>
+                <p id="detailLanguage">N/A</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CAST -->
+
+    <section class="cast-section">
+
+        <h2 class="section-title">STARRING</h2>
+
+        <div class="cast-list" id="castList"></div>
+
+    </section>
+
+
+    <footer>
+        © 2026 Virtual Theater
+    </footer>
+
+
+    <script>
+
+        /* =========================
+           ALL MOVIE DATA
+        ========================= */
+
+        const movies = {
+
+            "Spider-Man: Brand New Day": {
+                poster: "assets/posters/spiderman.jpg",
+                year: "2026",
+                genre: "Action / Superhero",
+                rating: "Coming Soon",
+                duration: "TBA",
+                description:
+                    "Spider-Man returns for a brand-new chapter, facing new challenges while trying to balance his life as Peter Parker and his responsibility as a hero.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "English",
+                cast: ["Tom Holland", "Zendaya", "TBA"]
+            },
+
+            "Dhurandhar": {
+                poster: "assets/posters/dhurandhar.jpg",
+                year: "2026",
+                genre: "Action / Thriller",
+                rating: "Coming Soon",
+                duration: "TBA",
+                description:
+                    "An intense action thriller filled with mystery, high-stakes missions and dangerous challenges.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "Hindi",
+                cast: ["Ranveer Singh", "TBA"]
+            },
+
+            "Dhoom Dhaam": {
+                poster: "assets/posters/dhoomdhaam.jpg",
+                year: "2026",
+                genre: "Comedy / Romance",
+                rating: "TBA",
+                duration: "TBA",
+                description:
+                    "A fun and entertaining story packed with unexpected situations and memorable characters.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "Hindi",
+                cast: ["TBA"]
+            },
+
+            "Hail Mary": {
+                poster: "assets/posters/hailmary.jpg",
+                year: "2026",
+                genre: "Drama / Adventure",
+                rating: "TBA",
+                duration: "TBA",
+                description:
+                    "A dramatic journey that takes its characters through unexpected challenges and discoveries.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "English",
+                cast: ["TBA"]
+            },
+
+            "The Super Mario Galaxy Movie": {
+                poster: "assets/posters/mario.jpg",
+                year: "2026",
+                genre: "Animation / Adventure",
+                rating: "Coming Soon",
+                duration: "TBA",
+                description:
+                    "Mario embarks on an exciting new adventure beyond the familiar world, exploring new galaxies and facing new enemies.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "English",
+                cast: ["Mario", "Luigi", "Princess Peach"]
+            },
+
+            "The Odyssey": {
+                poster: "assets/posters/odyssey.jpg",
+                year: "2026",
+                genre: "Adventure / Fantasy",
+                rating: "Coming Soon",
+                duration: "TBA",
+                description:
+                    "An epic adventure inspired by a legendary journey filled with danger, discovery and unforgettable challenges.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "English",
+                cast: ["TBA"]
+            },
+
+            "Toy Story 5": {
+                poster: "assets/posters/toystory5.jpg",
+                year: "2026",
+                genre: "Animation / Family",
+                rating: "Coming Soon",
+                duration: "TBA",
+                description:
+                    "Woody, Buzz and their friends return for another emotional and exciting adventure.",
+                director: "TBA",
+                writer: "TBA",
+                release: "2026",
+                runtime: "TBA",
+                language: "English",
+                cast: ["Tom Hanks", "Tim Allen"]
+            }
+
+        };
+
+
+        /* =========================
+           GET MOVIE FROM URL
+        ========================= */
+
+        const params = new URLSearchParams(window.location.search);
+
+        const title = params.get("title");
+
+        const movie = movies[title];
+
+
+        /* =========================
+           LOAD MOVIE
+        ========================= */
+
+        if (!movie) {
+
+            document.getElementById("movieTitle").textContent =
+                "Movie Not Found";
+
+            document.getElementById("movieDescription").textContent =
+                "This movie could not be found. Please go back and select a movie again.";
+
+        } else {
+
+            document.title =
+                movieTitle + " | Virtual Theater";
+
+            document.getElementById("movieTitle").textContent =
+                title;
+
+            document.getElementById("moviePoster").src =
+                movie.poster;
+
+            document.getElementById("moviePoster").alt =
+                title + " Poster";
+
+            document.getElementById("backgroundImage").src =
+                movie.poster;
+
+            document.getElementById("movieYear").textContent =
+                movie.year;
+
+            document.getElementById("movieGenre").textContent =
+                movie.genre;
+
+            document.getElementById("movieRating").textContent =
+                "⭐ " + movie.rating;
+
+            document.getElementById("movieDuration").textContent =
+                movie.duration;
+
+            document.getElementById("movieDescription").textContent =
+                movie.description;
+
+
+            /* DETAILS */
+
+            document.getElementById("detailRating").textContent =
+                movie.rating;
+
+            document.getElementById("detailDirector").textContent =
+                movie.director;
+
+            document.getElementById("detailWriter").textContent =
+                movie.writer;
+
+            document.getElementById("detailRelease").textContent =
+                movie.release;
+
+            document.getElementById("detailRuntime").textContent =
+                movie.runtime;
+
+            document.getElementById("detailLanguage").textContent =
+                movie.language;
+
+
+            /* CAST */
+
+            const castList =
+                document.getElementById("castList");
+
+            castList.innerHTML = "";
+
+            movie.cast.forEach(function(actor) {
+
+                const member =
+                    document.createElement("div");
+
+                member.className =
+                    "cast-member";
+
+                member.textContent =
+                    actor;
+
+                castList.appendChild(member);
+
+            });
+
+
+            /* WATCH BUTTON */
+
+            document.getElementById("watchButton").href =
+                "player.html?title=" +
+                encodeURIComponent(title);
+
+        }
+
+    </script>
+
+</body>
+</html>
